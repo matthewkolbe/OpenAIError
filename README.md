@@ -38,9 +38,9 @@ def get_name_from_json(json_string):
     raise KeyError(f"Could not find good candidate for 'name'")
 
 def main():
-    json_str_without_name = '{ "Name": "Leon", "Title": "Cleaner", "Age": 25, "City": "New York"}'
+    json_str_with_Name = '{ "Name": "Leon", "Title": "Cleaner", "Age": 25, "City": "New York"}'
     try:
-        print(get_name_from_json(json_str_without_name))
+        print(get_name_from_json(json_str_with_Name))
     except Exception as e:
         OAIExceptionHandler(e)
 
@@ -66,9 +66,9 @@ def get_name_from_json(json_string):
         raise KeyError(f"Could not find good candidate for 'name'")
 
 def main():
-    json_str_without_name = '{ "Name": "Leon", "Title": "Cleaner", "Age": 25, "City": "New York"}'
+    json_str_with_Name = '{ "Name": "Leon", "Title": "Cleaner", "Age": 25, "City": "New York"}'
     try:
-        print(get_name_from_json(json_str_without_name))
+        print(get_name_from_json(json_str_with_Name))
     except Exception as e:
         OAIExceptionHandler(e)
 
