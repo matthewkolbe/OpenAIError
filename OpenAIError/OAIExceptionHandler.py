@@ -38,7 +38,7 @@ import time
 # OpenAI's GPT model to offer commentary and a solution to the problem. If it has
 # a solition, this function will overwrite the problem file and store a copy of the 
 # old version
-def OAIExceptionHandler(exception, client = None, gpt_model = "gpt-4-1106-preview", max_file_len=5000):
+def OAIExceptionHandler(exception, client = None, gpt_model = "gpt-4-1106-preview", max_file_len=5000, debug = False):
     print(exception)
     tb = traceback.extract_tb(sys.exc_info()[2])
 
@@ -56,6 +56,9 @@ that the I likely made the error in. Do not write anything other than the file p
     )
 
     recommended_fname = which_file_completion.choices[0].message.content
+
+    if debug:
+        print(f"DEBUG: OpenAI's response to the stack trace location inquery: {recommended_fname}")
 
     for i, frame in enumerate(reversed(tb)):  # Reverse the traceback
         fname, lineno, func_name, text = frame  # Get the file name from the frame
@@ -94,13 +97,15 @@ that the I likely made the error in. Do not write anything other than the file p
 You use world-class expertise to correct the error that caused the exception. 
 You respond in JSON, by returning a fully executable module replacement in the following format: 
 { "comment": <string>, "fully_corrected_module_src": <string> }. 
-Do not write anything other than JSON or else I will die. If the code in fully_corrected_module_src 
-is perfect, I will tip you $1000.'''},
+Do not write anything other than valid JSON or else I will die.'''},
         {"role": "user", "content": json.dumps(exception_info)}
     ]
     )
 
     resp = completion.choices[0].message.content    
+
+    if debug:
+        print(f"DEBUG: OpenAI's response to the code fix query: \n\t{resp}")
     
     # gpt-4-1106-preview keeps wrapping its answer in markdown code labels for some reason
     resp = resp.strip('\"').split('\n', 1)[1].rsplit('\n', 1)[0]
