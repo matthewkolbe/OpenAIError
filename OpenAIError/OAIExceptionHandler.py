@@ -94,7 +94,8 @@ that the I likely made the error in. Do not write anything other than the file p
     messages=[
         {"role": "system", 
          "content": '''You receive JSON formatted information about an exception in python.
-You use world-class expertise to correct the error that caused the exception and any other errors you find. 
+You use world-class expertise to correct the error that caused the exception. 
+Correct other errors if you are extremely confident they are errors; if not leave the code alone. 
 You respond in JSON in the following schema: 
 { "comment": <string>, "fully_corrected_module_src": <string> }. 
 fully_corrected_module_src must be valid Python code. Add code comments to your corrections. 
