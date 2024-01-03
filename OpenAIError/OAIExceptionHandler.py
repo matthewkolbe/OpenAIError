@@ -111,16 +111,24 @@ Do not write anything other than valid JSON or else I will die.'''},
     if debug:
         print(f"DEBUG: OpenAI's response to the code fix query: \n\t{resp}")
     
-    # gpt-4-1106-preview keeps wrapping its answer in markdown code labels for some reason
-    resp = resp.strip('\"').split('\n', 1)[1].rsplit('\n', 1)[0]
+
     json_resp = None
 
     try:
         json_resp = json.loads(resp)
     except:
-        print("OpenAI failed to give back JSON. This was the respose, so no code changes were made:")
-        print(completion.choices[0].message.content)
-        sys.exit()
+        print("OpenAI failed to give back raw JSON. Checking marckdown wrapped JSON instead.")
+
+    # gpt-4-1106-preview keeps wrapping its answer in markdown code labels for some reason. Strip them, then
+    # check if the first json_resp didn't load.
+    if json_resp == None:
+        resp = resp.strip('\"').split('\n', 1)[1].rsplit('\n', 1)[0]
+        try:
+            json_resp = json.loads(resp)
+        except:
+            print("OpenAI failed to give back JSON. This was the respose, so no code changes were made:")
+            print(completion.choices[0].message.content)
+            sys.exit()
 
     brief_fname = fname[:-3]
 
