@@ -95,7 +95,7 @@ You use world-class expertise to correct the error that caused the exception.
 You respond in JSON, by returning a fully executable module replacement in the following format: 
 { "comment": <string>, "fully_corrected_module_src": <string> }. 
 Do not write anything other than JSON or else I will die. If the code in fully_corrected_module_src 
-is perfect, I will tip you $1000 dollars.'''},
+is perfect, I will tip you $1000.'''},
         {"role": "user", "content": json.dumps(exception_info)}
     ]
     )
