@@ -94,7 +94,7 @@ that the I likely made the error in. Do not write anything other than the file p
     messages=[
         {"role": "system", 
          "content": '''You receive JSON formatted information about an exception in python.
-You use world-class expertise to correct the error that caused the exception. 
+You use world-class expertise to correct the error that caused the exception and any other errors. 
 You respond in JSON, by returning a fully executable module replacement in the following format: 
 { "comment": <string>, "fully_corrected_module_src": <string> }. 
 Do not write anything other than valid JSON or else I will die.'''},
