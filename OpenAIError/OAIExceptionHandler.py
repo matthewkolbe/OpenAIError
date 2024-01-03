@@ -38,7 +38,7 @@ import time
 # OpenAI's GPT model to offer commentary and a solution to the problem. If it has
 # a solition, this function will overwrite the problem file and store a copy of the 
 # old version
-def OAIExceptionHandler(exception, client = None, gpt_model = "gpt-4-1106-preview", max_file_len=5000, debug = False):
+def OAIExceptionHandler(exception, client = None, gpt_model = "gpt-4", max_file_len=5000, debug = False):
     print(exception)
     tb = traceback.extract_tb(sys.exc_info()[2])
 
