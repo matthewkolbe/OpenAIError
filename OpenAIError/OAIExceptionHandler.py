@@ -101,7 +101,7 @@ You respond in JSON in the following schema:
 fully_corrected_module_src must be valid Python code. Add code comments to your corrections. 
 Do not add a "}" at the end of the code. 
 Leave OAIExceptionHandler alone. 
-Do not write anything other than valid JSON or else I will die.'''},
+Exclusively write a valid JSON schema answer or else I will die.'''},
         {"role": "user", "content": json.dumps(exception_info)}
     ]
     )
